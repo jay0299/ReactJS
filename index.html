@@ -13,7 +13,8 @@
     const App = () => {
       const [counter, setCounter] = React.useState(0);
       function countUp() {
-        setCounter(counter + 1);
+        // setCounter(counter + 1);
+        setCounter((current) => current + 1); // to make sure the value of the state is current value
       }
       return (
         <div>
