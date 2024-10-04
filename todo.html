@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    const App = () => {
+      const [toDo, setToDo] = React.useState('');
+      const [toDos, setToDos] = React.useState([]);
+
+      const onChange = (event) => setToDo(event.target.value);
+      const onSubmit = (event) => {
+        event.preventDefault();
+        if (toDo === '') {
+          return;
+        }
+        setToDos((currentArray) => [...currentArray, toDo]);
+        setToDo('');
+      };
+
+      return (
+        <div>
+          <h1>My To Dos ({toDos.length})</h1>
+          <form onSubmit={onSubmit}>
+            <input
+              onChange={onChange}
+              value={toDo}
+              placeholder="Write your to dos..."
+            />
+            <button>Submit</button>
+          </form>
+          <hr />
+          <ul>
+            {toDos.map((toDo) => (
+              <li>{toDo}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
